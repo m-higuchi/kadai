@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "define.h"
-#include "converter2.h"
+#include "converter.h"
 #include "calc.h"
 #include "check.h"
 
