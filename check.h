@@ -102,8 +102,8 @@ int check(char *str){
       k = 1;
       break;
     case '(':
-      if(k == 0){
-	err = 2;
+      if(k == 0 && i != 0){
+	err = 3;
       }
       k = 2;
       break;

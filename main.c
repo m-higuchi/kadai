@@ -7,12 +7,13 @@
 #include "check.h"
 
 int main(void){
-  char buf[256],s[256];
+  char buf[256],s[256],err;
   double ans;
   fgets(buf,sizeof(buf),stdin);
 
-  if(check(buf) != 0){
-    printf("input error\n");
+  err = check(buf);
+  if(err != 0){
+    printf("input error(%d)\n",err);
     exit(-1);
   }
   converter(buf,s);
