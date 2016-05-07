@@ -12,7 +12,7 @@ double calc(char *str){
     if(str[i] >= '0' && str[i] <= '9'){
       j = 0;
       while(str[i] != ' '){
-	z = (str[i] - 48)+z*j*10;
+	z = (str[i] - 48)+z*10;
 	i++;
 	j++;
       }
