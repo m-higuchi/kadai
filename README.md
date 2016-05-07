@@ -2,4 +2,5 @@
 Simple arithmetic calculator.
 
 # Usage
-* You can use integers, operators +-*/^ and brackets ().
+* Input an arithmetic formula.
+* You can use integers, operators +-*/^, functions (sin, cos, tan, exp, ln), and brackets ().
