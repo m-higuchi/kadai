@@ -16,6 +16,31 @@ double calc(char *str){
 	j++;
       }
       calc_push(&stk,z);
+    }else if(str[i] == 's'){
+      calc_pop(&stk,&tmp);
+      ans = sin(tmp);
+      calc_push(&stk,ans);
+      i++;
+    }else if(str[i] == 'c'){
+      calc_pop(&stk,&tmp);
+      ans = cos(tmp);
+      calc_push(&stk,ans);
+      i++;
+    }else if(str[i] == 't'){
+      calc_pop(&stk,&tmp);
+      ans = tan(tmp);
+      calc_push(&stk,ans);
+      i++;
+    }else if(str[i] == 'e'){
+      calc_pop(&stk,&tmp);
+      ans = exp(tmp);
+      calc_push(&stk,ans);
+      i++;
+    }else if(str[i] == 'l'){
+      calc_pop(&stk,&tmp);
+      ans = log(tmp);
+      calc_push(&stk,ans);
+      i++;
     }else if(str[i] == '^'){
       calc_pop(&stk,&tmp);
       ans = tmp;

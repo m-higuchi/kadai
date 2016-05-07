@@ -1,5 +1,5 @@
-#ifndef INCLUDE_CONVERTER2
-#define INCLUDE_CONVERTER2
+#ifndef INCLUDE_CONVERTER
+#define INCLUDE_CONVERTER
 #include "define.h"
 #include "stack.h"
 
@@ -31,7 +31,7 @@ int converter(char *buf,char *s){
       rpn_push(&stk,buf[i]);
       //      rpn_print(&stk);
       i++;
-    }else if(priority(buf[i]) <= 4 && priority(buf[i]) >= 1){
+    }else if(priority(buf[i]) <= 5 && priority(buf[i]) >= 1){
       while(rpn_pop(&stk,&top) != -1 && priority(buf[i]) >= priority(top)){
 	if(buf[i] == ')' && top == '('){
 	  //	  rpn_print(&stk);
@@ -68,14 +68,16 @@ int converter(char *buf,char *s){
 int priority(char c){
   if(c >= '0' && c <= '9'){
     return 0;
-  }else if(c == '^'){
+  }else if(c == 's' || c == 'c' || c == 't' || c == 'e' || c == 'l'){
     return 1;
-  }else if(c == '*' || c == '/'){
+  }else if(c == '^'){
     return 2;
-  }else if(c == '+' || c == '-'){
+  }else if(c == '*' || c == '/'){
     return 3;
-  }else if(c == '(' || c == ')'){
+  }else if(c == '+' || c == '-'){
     return 4;
+  }else if(c == '(' || c == ')'){
+    return 5;
   }else{
     return 99;
   }
