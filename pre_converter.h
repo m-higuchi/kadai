@@ -7,7 +7,7 @@
 int pre_converter(char *s1,char *s2){
   int i=0,j=0,flag=0;
   char tmp[256];
-  printf("pre_converter started: %s\n",s1);
+
   while(1){
     if(s1[i] == '\0'){
       flag = 1;
@@ -42,7 +42,6 @@ int pre_converter(char *s1,char *s2){
     }
   }
 
-  printf("pre_converter finished: %s\n",s2);
   return 0;
 }
 #endif

@@ -6,7 +6,6 @@
 #include <string.h>
 
 int check(char *str){
-  printf("check started: %s\n",str);
   int len,i=0,err=0,k,a=0;
   char buf[256];
   len = strlen(str);
@@ -110,7 +109,6 @@ int check(char *str){
       break;
     case ')':
       if(k == 1 || k == 4){
-	printf("k = %d\n",k);
 	err = 7;
       }
       k = 3;
@@ -198,13 +196,11 @@ int check(char *str){
       strcpy(buf,str+i+1);
       str[i+1] = '0';
       str[i+2] = '\0';
-      printf("buf = %s\n",buf);
-      printf("str = %s\n",str);
       strcat(str,buf);
     }
     i++;
   }
-  printf("str=%s\n",str);
+  
   i = 0;
   while(str[i] != '\0'){
     if(str[i] == '('){

@@ -6,7 +6,7 @@
 int priority(char);
 
 int converter(char *buf,char *s){
-  printf("\nconvert started\n");
+
   stack_rpn stk = {0};
   
   int i=0,j=0,k,flag;

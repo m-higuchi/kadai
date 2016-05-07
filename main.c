@@ -17,14 +17,15 @@ int main(void){
     printf("input error(%d)\n",err);
     exit(-1);
   }
-  printf("buf = %s\n",buf);
+
   pre_converter(buf,s1);
-  printf("%s\n",s1);
+  //printf("%s\n",s1);
   
   converter(s1,s2);
   printf("reverse polish notation : %s\n",s2);
   ans = calc(s2);
-  printf("ans = %lf\n",ans);
+  
+  printf("================\nans. = %lf\n================\n",ans);
 
   return 0;
 }
