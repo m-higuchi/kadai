@@ -7,6 +7,7 @@ double calc(char *str){
   stack_calc stk={0};
   int i=0,j;
   double ans=0,tmp,z=0;
+  
   while(str[i] != '\0'){
     if(str[i] >= '0' && str[i] <= '9'){
       j = 0;
@@ -78,6 +79,9 @@ double calc(char *str){
       i++;
     }
     i++;
+  }
+  if(i == 2){
+    calc_pop(&stk,&ans);
   }
   return ans;  
 }
