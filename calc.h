@@ -80,9 +80,7 @@ double calc(char *str){
     }
     i++;
   }
-  if(i == 2){
-    calc_pop(&stk,&ans);
-  }
+  calc_pop(&stk,&ans);
   return ans;  
 }
 
