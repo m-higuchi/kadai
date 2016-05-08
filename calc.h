@@ -7,7 +7,7 @@ double calc(char *str){
   stack_calc stk={0};
   int i=0,j;
   double ans=0,tmp,z=0;
-  
+  //printf("str = %s\n",str);
   while(str[i] != '\0'){
     if(str[i] >= '0' && str[i] <= '9'){
       j = 0;
@@ -17,6 +17,7 @@ double calc(char *str){
 	j++;
       }
       calc_push(&stk,z);
+      z = 0;
     }else if(str[i] == 's'){
       calc_pop(&stk,&tmp);
       ans = sin(tmp);
