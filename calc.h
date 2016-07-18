@@ -5,7 +5,7 @@
 
 double calc(char *str){
   stack_calc stk={0};
-  int i=0,j;
+  int i=0,j,err=0;
   double ans=0,tmp,z=0;
   //printf("str = %s\n",str);
   while(str[i] != '\0'){
@@ -60,6 +60,10 @@ double calc(char *str){
     }else if(str[i] == '/'){
       calc_pop(&stk,&tmp);
       ans = tmp;
+      if(ans == 0){
+	printf("error\n");
+	exit(-1);
+      }
       calc_pop(&stk,&tmp);
       ans = tmp / ans;
       calc_push(&stk,ans);
