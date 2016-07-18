@@ -3,7 +3,7 @@
 
 #include <string.h>
 #include "define.h"
-
+//"sin","cos","tan","exp","ln"をそれぞれ"s","c","t","e","l"に変換 
 int pre_converter(char *s1,char *s2){
   int i=0,j=0,flag=0;
   char tmp[256];

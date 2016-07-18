@@ -2,6 +2,7 @@
 #define INCLUDE_CONVERTER
 #include "define.h"
 #include "stack.h"
+//逆ポーランド記法に変換
 
 int priority(char);
 
@@ -66,7 +67,7 @@ int converter(char *buf,char *s){
 }
 
 int priority(char c){
-  if(c >= '0' && c <= '9'){
+  if(c >= '0' && c <= '9' || c == '.'){
     return 0;
   }else if(c == 's' || c == 'c' || c == 't' || c == 'e' || c == 'l'){
     return 1;
