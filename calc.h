@@ -5,16 +5,26 @@
 
 double calc(char *str){
   stack_calc stk={0};
-  int i=0,j;
+  int i=0,j=0;
   double ans=0,tmp,z=0;
   //printf("str = %s\n",str);
   while(str[i] != '\0'){
     if(str[i] >= '0' && str[i] <= '9'){
       j = 0;
       while(str[i] != ' '){
-	z = (str[i] - 48)+z*10;
-	i++;
-	j++;
+	//	printf("%c",str[i]);
+	if(str[i] == '.'){
+	  j = -1;
+	  i++;
+	}
+	if(j == 0){
+	  z = (str[i] - 48)+z*10;
+	  i++;
+	}else{
+	  z = z + (str[i]-48)*pow(10,j);
+	  i++;
+	  j--;
+	}
       }
       calc_push(&stk,z);
       z = 0;
