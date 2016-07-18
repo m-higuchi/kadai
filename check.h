@@ -131,6 +131,11 @@ int check(char *str){
       k = 3;
       break;
     case 's':
+      if(str[i+1] == 'q' && str[i+2] == 'r' && str[i+3] == 't'){
+	k = 4;
+	i = i + 3;
+	break;
+      }
       if(str[i+1] != 'i' || str[i+2] != 'n'){
 	err = 5;
       }

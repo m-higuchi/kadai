@@ -53,6 +53,11 @@ double calc(char *str){
       ans = log(tmp);
       calc_push(&stk,ans);
       i++;
+    }else if(str[i] == 'q'){
+      calc_pop(&stk,&tmp);
+      ans = sqrt(tmp);
+      calc_push(&stk,ans);
+      i++;
     }else if(str[i] == '^'){
       calc_pop(&stk,&tmp);
       ans = tmp;
