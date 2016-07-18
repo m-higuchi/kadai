@@ -70,6 +70,10 @@ double calc(char *str){
     }else if(str[i] == '/'){
       calc_pop(&stk,&tmp);
       ans = tmp;
+      if(ans == 0){
+	printf("error\n");
+	exit(-1);
+      }
       calc_pop(&stk,&tmp);
       ans = tmp / ans;
       calc_push(&stk,ans);
