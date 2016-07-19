@@ -3,11 +3,14 @@
 #include <math.h>
 #include "stack.h"
 
-double calc(char *str){
-  stack_calc stk={0};
+double complex calc(char *str){
+  //stack_calc stk={0};
+  stack_ccalc stk = {0};
   int i=0,j=0;
-  double ans=0,tmp,z=0;
-  //printf("str = %s\n",str);
+  //double ans=0;
+  double real,imaginary;
+  double complex z = 0+0i,tmp,ans=0+0i;
+
   while(str[i] != '\0'){
     if(str[i] >= '0' && str[i] <= '9'){
       j = 0;
@@ -18,40 +21,47 @@ double calc(char *str){
 	  i++;
 	}
 	if(j == 0){
-	  z = (str[i] - 48)+z*10;
+	  __real__ z = (str[i] - 48)+creal(z)*10;
+	  __imag__ z = 0;
 	  i++;
 	}else{
-	  z = z + (str[i]-48)*pow(10,j);
+	  __real__ z = creal(z) + (str[i]-48)*pow(10,j);
+	  __imag__ z = 0;
 	  i++;
 	  j--;
 	}
       }
-      calc_push(&stk,z);
-      z = 0;
+      ccalc_push(&stk,z);
+      z = 0+0i;
+    }else if(str[i] == 'i'){
+      __real__ z = 0;
+      __imag__ z = 1;
+      ccalc_push(&stk,z);
+      z = 0+0i;
     }else if(str[i] == 's'){
-      calc_pop(&stk,&tmp);
-      ans = sin(tmp);
-      calc_push(&stk,ans);
+      ccalc_pop(&stk,&tmp);
+      ans = csin(tmp);
+      ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == 'c'){
-      calc_pop(&stk,&tmp);
-      ans = cos(tmp);
-      calc_push(&stk,ans);
+      ccalc_pop(&stk,&tmp);
+      ans = ccos(tmp);
+      ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == 't'){
-      calc_pop(&stk,&tmp);
-      ans = tan(tmp);
-      calc_push(&stk,ans);
+      ccalc_pop(&stk,&tmp);
+      ans = ctan(tmp);
+      ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == 'e'){
-      calc_pop(&stk,&tmp);
-      ans = exp(tmp);
-      calc_push(&stk,ans);
+      ccalc_pop(&stk,&tmp);
+      ans = cexp(tmp);
+      ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == 'l'){
-      calc_pop(&stk,&tmp);
-      ans = log(tmp);
-      calc_push(&stk,ans);
+      ccalc_pop(&stk,&tmp);
+      ans = clog(tmp);
+      ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == 'q'){
       calc_pop(&stk,&tmp);
@@ -59,48 +69,48 @@ double calc(char *str){
       calc_push(&stk,ans);
       i++;
     }else if(str[i] == '^'){
-      calc_pop(&stk,&tmp);
-      ans = tmp;
-      calc_pop(&stk,&tmp);
-      ans = pow(tmp,ans);
-      calc_push(&stk,ans);
+      ccalc_pop(&stk,&tmp);
+      ans = tmp;    
+      ccalc_pop(&stk,&tmp);
+      ans = cpow(tmp,ans);
+      ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == '*'){
-      calc_pop(&stk,&tmp);
+      ccalc_pop(&stk,&tmp);
       ans = tmp;
-      calc_pop(&stk,&tmp);
+      ccalc_pop(&stk,&tmp);
       ans = ans * tmp;
-      calc_push(&stk,ans);
+      ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == '/'){
-      calc_pop(&stk,&tmp);
+      ccalc_pop(&stk,&tmp);
       ans = tmp;
-      if(ans == 0){
+      if(creal(ans) == 0 && cimag(ans) == 0){
 	printf("error\n");
 	exit(-1);
       }
-      calc_pop(&stk,&tmp);
+      ccalc_pop(&stk,&tmp);
       ans = tmp / ans;
-      calc_push(&stk,ans);
+      ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == '+'){
-      calc_pop(&stk,&tmp);
+      ccalc_pop(&stk,&tmp);
       ans = tmp;
-      calc_pop(&stk,&tmp);
+      ccalc_pop(&stk,&tmp);
       ans = ans + tmp;
-      calc_push(&stk,ans);
+      ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == '-'){
-      calc_pop(&stk,&tmp);
+      ccalc_pop(&stk,&tmp);
       ans = tmp;
-      calc_pop(&stk,&tmp);
+      ccalc_pop(&stk,&tmp);
       ans = tmp - ans;
-      calc_push(&stk,ans);
+      ccalc_push(&stk,ans);
       i++;
     }
     i++;
   }
-  calc_pop(&stk,&ans);
+  ccalc_pop(&stk,&ans);
   return ans;  
 }
 

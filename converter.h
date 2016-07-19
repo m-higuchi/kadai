@@ -67,7 +67,7 @@ int converter(char *buf,char *s){
 }
 
 int priority(char c){
-  if(c >= '0' && c <= '9' || c == '.'){
+  if((c >= '0' && c <= '9') || c == '.' || c == 'i'){
     return 0;
   }else if(c == 's' || c == 'c' || c == 't' || c == 'e' || c == 'l' || c == 'q'){
     return 1;

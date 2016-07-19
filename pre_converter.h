@@ -3,7 +3,7 @@
 
 #include <string.h>
 #include "define.h"
-//"sin","cos","tan","exp","ln"をそれぞれ"s","c","t","e","l"に変換 
+//"sin","cos","tan","exp","ln","%i"をそれぞれ"s","c","t","e","l","i"に変換 
 int pre_converter(char *s1,char *s2){
   int i=0,j=0,flag=0;
   char tmp[256];
@@ -36,8 +36,11 @@ int pre_converter(char *s1,char *s2){
       s2[j] = 'q';
       j++;
       i = i+4;
-    }
-    else{
+    }else if(s1[i] == '%' && s1[i+1] == 'i'){
+      s2[j] = 'i';
+      j++;
+      i = i+2;
+    }else{
       s2[j] = s1[i];
       j++;
       i++;
