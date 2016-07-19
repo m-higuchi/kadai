@@ -32,7 +32,12 @@ int pre_converter(char *s1,char *s2){
       s2[j] = s1[i];
       j++;
       i = i+2;
-    }else{
+    }else if(s1[i] == 's' && s1[i+1] == 'q' && s1[i+2] == 'r' && s1[i+3] == 't'){
+      s2[j] = 'q';
+      j++;
+      i = i+4;
+    }
+    else{
       s2[j] = s1[i];
       j++;
       i++;
