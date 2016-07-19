@@ -31,7 +31,6 @@ double complex calc(char *str){
 	  j--;
 	}
       }
-      //calc_push(&stk,z);
       ccalc_push(&stk,z);
       z = 0+0i;
     }else if(str[i] == 'i'){
@@ -40,60 +39,40 @@ double complex calc(char *str){
       ccalc_push(&stk,z);
       z = 0+0i;
     }else if(str[i] == 's'){
-      //calc_pop(&stk,&tmp);
       ccalc_pop(&stk,&tmp);
-      //ans = sin(tmp);
       ans = csin(tmp);
-      //calc_push(&stk,ans);
       ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == 'c'){
-      //calc_pop(&stk,&tmp);
       ccalc_pop(&stk,&tmp);
-      //ans = cos(tmp);
       ans = ccos(tmp);
-      //calc_push(&stk,ans);
       ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == 't'){
-      //calc_pop(&stk,&tmp);
       ccalc_pop(&stk,&tmp);
-      //ans = tan(tmp);
       ans = ctan(tmp);
-      //calc_push(&stk,ans);
       ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == 'e'){
-      //calc_pop(&stk,&tmp);
       ccalc_pop(&stk,&tmp);
-      //ans = exp(tmp);
       ans = cexp(tmp);
-      //calc_push(&stk,ans);
       ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == 'l'){
-      //calc_pop(&stk,&tmp);
       ccalc_pop(&stk,&tmp);
-      //ans = log(tmp);
       ans = clog(tmp);
-      //calc_push(&stk,ans);
       ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == '^'){
-      //calc_pop(&stk,&tmp);
       ccalc_pop(&stk,&tmp);
       ans = tmp;    
-      //calc_pop(&stk,&tmp);
       ccalc_pop(&stk,&tmp);
-      //ans = pow(tmp,ans);
       ans = cpow(tmp,ans);
       ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == '*'){
-      //calc_pop(&stk,&tmp);
       ccalc_pop(&stk,&tmp);
       ans = tmp;
-      //calc_pop(&stk,&tmp);
       ccalc_pop(&stk,&tmp);
       ans = ans * tmp;
       ccalc_push(&stk,ans);
