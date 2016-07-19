@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <complex.h>
 
 #include "define.h"
 #include "converter.h"
@@ -9,7 +10,7 @@
 
 int main(void){
   char buf[256],s1[256],s2[256],err;
-  double ans;
+  double complex ans=0+0i;
   fgets(buf,sizeof(buf),stdin);
 
   err = check(buf);
@@ -25,7 +26,7 @@ int main(void){
   printf("reverse polish notation : %s\n",s2);
   ans = calc(s2);
   
-  printf("================\nans. = %lf\n================\n",ans);
+  printf("================\nans. = %f%+fi\n================\n",creal(ans),cimag(ans));
 
   return 0;
 }
