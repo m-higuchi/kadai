@@ -20,14 +20,17 @@ int main(void){
   }
 
   pre_converter(buf,s1);
-  //printf("%s\n",s1);
   
   converter(s1,s2);
-  printf("reverse polish notation : %s\n",s2);
+  //printf("reverse polish notation : %s\n",s2);
   ans = calc(s2);
-  
-  printf("================\nans. = %f%+fi\n================\n",creal(ans),cimag(ans));
-
+  if(cimag(ans) == 0){
+    printf("= %f\n",creal(ans));
+  }else if(creal(ans) == 0){
+    printf("= %fi\n",cimag(ans));
+  }else{
+    printf("= %f%+fi\n",creal(ans),cimag(ans));
+  }
   return 0;
 }
 
