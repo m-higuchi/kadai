@@ -64,9 +64,9 @@ double complex calc(char *str){
       ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == 'q'){
-      calc_pop(&stk,&tmp);
-      ans = sqrt(tmp);
-      calc_push(&stk,ans);
+      ccalc_pop(&stk,&tmp);
+      ans = csqrt(tmp);
+      ccalc_push(&stk,ans);
       i++;
     }else if(str[i] == '^'){
       ccalc_pop(&stk,&tmp);
