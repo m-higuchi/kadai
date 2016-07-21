@@ -10,199 +10,167 @@
 // ^*/+- => k=1
 // ( => k=2
 // ) => k=3
-// scetl => k=4
-// %i => k=5
+// sin,cos,conj,tan,exp,ln,sqrt,arg,abs,acos,asin,atan,imag,real => k=4
+// %i,%pi => k=5
+// . => k=6
 int check(char *str){
   int len,i=0,err=0,k=-1,a=0,l=0;
   char buf[256];
   len = strlen(str);
   while(str[i] != '\0'){
-    switch(str[i]){
-    case '0':
+    if(str[i] >= '0' && str[i] <= '9'){
       if(k == 3 || k == 5){
-	err = 2;
+	err = 1;
       }
       k = 0;
-      break;
-    case '1':
-      if(k == 3 || k == 5){
+    }else if(str[i] == '.'){
+      if(k == 3 || k == 5 || l == 1){
 	err = 2;
-      }
-      k = 0;
-      break;
-    case '2':
-      if(k == 3 || k == 5){
-	err = 2;
-      }
-      k = 0;
-      break;
-    case '3':
-      if(k == 3 || k == 5){
-	err = 2;
-      }
-      k = 0;
-      break;
-    case '4':
-      if(k == 3 || k == 5){
-	err = 2;
-      }
-      k = 0;
-      break;
-    case '5':
-      if(k == 3 || k == 5){
-	err = 2;
-      }
-      k = 0;
-      break;
-    case '6':
-      if(k == 3 || k == 5){
-	err = 2;
-      }
-      k = 0;
-      break;
-    case '7':
-      if(k == 3 || k == 5){
-	err = 2;
-      }
-      k = 0;
-      break;
-    case '8':
-      if(k == 3 || k == 5){
-	err = 2;
-      }
-      k = 0;
-      break;
-    case '9':
-      if(k == 3 || k == 5){
-	err = 2;
-      }
-      k = 0;
-      break;
-    case '.':
-      if(l == 1 || k == 3 || k == 5){
-	err = 11;
       }
       l = 1;
       k = 6;
-      break;
-    case '^':
-      if(k == 1 || k == 2 || k == 4){
-	err = 3;
-      }
-      k = 1;
-      break;
-    case '*':
+    }else if(str[i] == '^'){
       if(k == 1 || k == 2 || k == 4){
 	err = 3;
       }
       k = 1;
       l = 0;
-      break;
-    case '/':
+    }else if(str[i] == '*'){
       if(k == 1 || k == 2 || k == 4){
-	err = 3;
-      }
-      k = 1;
-      l = 0;
-      break;
-    case '+':
-      if(k == 1 || k == 4){
-	err = 3;
-      }
-      k = 1;
-      l = 0;
-      break;
-    case '-':
-      if(k == 1 || k == 4){
-	err = 3;
-      }
-      k = 1;
-      l = 0;
-      break;
-    case '(':
-      if(k == 0 || k == 5 || k == 6){
 	err = 4;
       }
-      k = 2;
-      break;
-    case ')':
-      if(k == 1 || k == 4 || k == 6){
+      k = 1;
+      l = 0;
+    }else if(str[i] == '/'){
+      if(k == 1 || k == 2 || k == 4){
+	err = 5;
+      }
+      k = 1;
+      l = 0;
+    }else if(str[i] == '+'){
+      if(k == 1 || k == 4){
+	err = 6;
+      }
+      k = 1;
+      l = 0;
+    }else if(str[i] == '-'){
+      if(k == 1 || k == 4){
 	err = 7;
       }
+      k = 1;
+      l = 0;
+    }else if(str[i] == '('){
+      if(k == 0 || k == 5 || k == 6){
+	err = 8;
+      }
+      k = 2;
+    }else if(str[i] == ')'){
+      if(k == 1 || k == 4 || k == 6){
+	err = 9;
+      }
       k = 3;
-      break;
-    case 's':
-      if(str[i+1] == 'q' && str[i+2] == 'r' && str[i+3] == 't'){
-	k = 4;
-	i = i + 3;
-	break;
-      }
-      if(str[i+1] != 'i' || str[i+2] != 'n'){
-	err = 5;
-      }
+    }else if(str[i] == 's' && str[i+1] == 'q' && str[i+2] == 'r' && str[i+3] == 't'){
       if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
-	err = 6;
+	err = 10;
       }
       k = 4;
-      i = i+2;
-      break;
-    case 'c':
-      if(str[i+1] != 'o' || str[i+2] != 's'){
-	err = 5;
-      }
-      if(((k == 0 || k == 3 || k == 4) && i != 0) || k == 5 || k == 6){
-	err = 6;
-      }
-      k = 4;
-      i = i+2;
-      break;
-    case 't':
-      if(str[i+1] != 'a' || str[i+2] != 'n'){
-	err = 5;
-      }
-      if(((k == 0 || k == 3 || k == 4) && i != 0) || k == 5 || k == 6){
-	err = 6;
-      }
-      k = 4;
-      i = i+2;
-      break;
-    case 'e':
-      if(str[i+1] != 'x' || str[i+2] != 'p'){
-	err = 5;
-      }
+      i = i + 3;
+    }else if(str[i] == 's' && str[i+1] == 'i' && str[i+2] == 'n'){
       if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
-	err = 6;
+	err = 11;
       }
       k = 4;
       i = i+2;
-      break;
-    case 'l':
-      if(str[i+1] != 'n'){
-	err = 5;
-      }
+    }else if(str[i] == 'c' && str[i+1] == 'o' && str[i+2] == 's'){
       if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
-	err = 6;
+	err = 12;
+      }
+      k = 4;
+      i = i+2;
+    }else if(str[i] == 'c' && str[i+1] == 'o' && str[i+2] == 'n' && str[i+3] == 'j'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 13;
+      }
+      k = 4;
+      i = i+3;
+    }else if(str[i] == 't' && str[i+1] == 'a' && str[i+2] == 'n'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 14;
+      }
+      k = 4;
+      i = i+2;
+    }else if(str[i] == 'e' && str[i+1] == 'x' && str[i+2] == 'p'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 15;
+      }
+      k = 4;
+      i = i+2;
+    }else if(str[i] == 'l' && str[i+1] == 'n'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 16;
       }
       k = 4;
       i = i+1;
-      break;
-    case '%':
-      if(str[i+1] != 'i'){
-	err = 12;
+    }else if(str[i] == 'a' && str[i+1] == 'c' && str[i+2] == 'o' && str[i+3] == 's'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 17;
       }
+      k = 4;
+      i = i+3;
+    }else if(str[i] == 'a' && str[i+1] == 's' && str[i+2] == 'i' && str[i+3] == 'n'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 18;
+      }
+      k = 4;
+      i = i+3;
+    }else if(str[i] == 'a' && str[i+1] == 't' && str[i+2] == 'a' && str[i+3] == 'n'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 19;
+      }
+      k = 4;
+      i = i+3;
+    }else if(str[i] == 'a' && str[i+1] == 'r' && str[i+2] == 'g'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 20;
+      }
+      k = 4;
+      i = i+2;
+    }else if(str[i] == 'a' && str[i+1] == 'b' && str[i+2] == 's'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 21;
+      }
+      k = 4;
+      i = i+2;
+    }else if(str[i] == 'i' && str[i+1] == 'm' && str[i+2] == 'a' && str[i+3] == 'g'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 22;
+      }
+      k = 4;
+      i = i+3;
+    }else if(str[i] == 'r' && str[i+1] == 'e' && str[i+2] == 'a' && str[i+3] == 'l'){
+      if(k == 0 || k == 3 || k == 4 || k == 5 || k == 6){
+	err = 23;
+      }
+      k = 4;
+      i = i+3;
+    }else if(str[i] == '%' && str[i+1] == 'i'){
       if(k == 0 || k == 3 || k == 5){
-	err = 13;
+	err = 24;
       }
       k = 5;
       i = i+1;
-      break;
-    case '\n':
-      if(k == 1 || k == 2 || k == 4){
-	err = 9;
+    }else if(str[i] == '%' && str[i+1] == 'p' && str[i+2] == 'i'){
+      if(k == 0 || k == 3 || k == 5){
+	err = 25;
       }
-      break;
-    default:
-      err = 1;
+      k = 5;
+      i = i+2;
+    }else if(str[i] == '\n'){
+      if(k == 1 || k == 2 || k == 4){
+	err = 26;
+      }
+    }else{
+      err = 27;
     }
     i++;
   }
@@ -273,7 +241,6 @@ int check(char *str){
   if(a != 0){
     err = 10;
   }
-  //  printf("str = %s\n",str);
 
   return err;
 }
