@@ -1,6 +1,23 @@
-# Description
-Simple arithmetic calculator.
+#関数電卓
 
-# Usage
-* Input an arithmetic formula.
-* You can use integers, operators +-*/^, functions (sin, cos, tan, exp, ln), and brackets ().
+#機能
+* 数式を入力すると計算結果を表示します。
+
+##引数
+* 複素数
+
+##関数
+*複素関数
+* sin, cos, tan : 三角関数
+* asin, acos, atan : 逆三角関数
+* exp : 底がネイピア数である指数関数
+* ln : 自然対数
+* abs : 絶対値
+* arg : 偏角
+* real : 実部
+* imag : 虚部
+* conj : 複素共役
+
+##定数
+* %i : 虚数単位
+* %pi : 円周率

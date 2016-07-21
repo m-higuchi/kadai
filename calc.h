@@ -1,13 +1,12 @@
 #ifndef INCLUDE_CALC
 #define INCLUDE_CALC
 #include <math.h>
+#include <complex.h>
 #include "stack.h"
 
 double complex calc(char *str){
-  //stack_calc stk={0};
   stack_ccalc stk = {0};
   int i=0,j=0;
-  //double ans=0;
   double real,imaginary;
   double complex z = 0+0i,tmp,ans=0+0i;
 
@@ -15,7 +14,6 @@ double complex calc(char *str){
     if(str[i] >= '0' && str[i] <= '9'){
       j = 0;
       while(str[i] != ' '){
-	//	printf("%c",str[i]);
 	if(str[i] == '.'){
 	  j = -1;
 	  i++;
@@ -33,9 +31,14 @@ double complex calc(char *str){
       }
       ccalc_push(&stk,z);
       z = 0+0i;
-    }else if(str[i] == 'i'){
+    }else if(str[i] == 'I'){
       __real__ z = 0;
       __imag__ z = 1;
+      ccalc_push(&stk,z);
+      z = 0+0i;
+    }else if(str[i] == 'P'){
+      __real__ z = M_PI;
+      __imag__ z = 0;
       ccalc_push(&stk,z);
       z = 0+0i;
     }else if(str[i] == 's'){
@@ -67,6 +70,39 @@ double complex calc(char *str){
       ccalc_pop(&stk,&tmp);
       ans = csqrt(tmp);
       ccalc_push(&stk,ans);
+      i++;
+    }else if(str[i] == 'o'){
+      ccalc_pop(&stk,&tmp);
+      ans = -I*clog(tmp+I*csqrt(1-tmp*tmp));
+      i++;
+    }else if(str[i] == 'n'){
+      ccalc_pop(&stk,&tmp);
+      ans = -I*clog(csqrt(1-tmp*tmp)+I*tmp);
+      i++;
+    }else if(str[i] == 'u'){
+      ccalc_pop(&stk,&tmp);
+      ans = 0.5*I*clog((I+tmp)/(I-tmp));
+      i++;
+    }else if(str[i] == 'b'){
+      ccalc_pop(&stk,&tmp);
+      ans = cabs(tmp);
+      i++;
+    }else if(str[i] == 'r'){
+      ccalc_pop(&stk,&tmp);
+      ans = creal(tmp);
+      printf("%lf,%lf\n",creal(ans),cimag(ans));
+      i++;
+    }else if(str[i] == 'i'){
+      ccalc_pop(&stk,&tmp);
+      ans = cimag(tmp);
+      i++;
+    }else if(str[i] == 'g'){
+      ccalc_pop(&stk,&tmp);
+      ans = carg(tmp);
+      i++;
+    }else if(str[i] == 'j'){
+      ccalc_pop(&stk,&tmp);
+      ans = conj(tmp);
       i++;
     }else if(str[i] == '^'){
       ccalc_pop(&stk,&tmp);
